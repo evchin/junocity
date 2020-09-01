@@ -1,0 +1,84 @@
+{% extends 'base.html' %}
+{% load static %}}
+{% block title %} Browse Junocity {% endblock title %}
+
+{% block content %}
+
+<div class="browse go-left">
+    <div>
+        <form action="" id="browse-form" method="get">
+            <input type="text" name="q" aria-label="Search" placeholder="Search blocks, users, and posts" class="search-bar" value="{{ request.GET.q }}">
+            <button type="submit" value="Search">Search</button>
+        </form>
+    </div>
+
+    {% if request.GET.q is not None %}        
+    
+    <div class="search-filters">
+        <button id="posts" class="filter-button selected-filter">Posts</button>
+        <button id="blocks" class="filter-button">Blocks</button>
+        <button id="users" class="filter-button">Users</button>
+    </div>
+    
+    <div class="search-results">
+
+        <div id="posts-grid-id" class="posts-grid results-grid selected-filter">
+            {% if post_list %}
+                {% for post in post_list %}
+                    <div class="post-snippet snippet">
+                        <a href="{% url 'post_detail' post.pk %}"><b>{{post.title}}</b></a>
+                        <p>by {{post.author}} | {{post.published}}</p>
+                        <p>{{post.body|safe|truncatechars:250}}</p>
+                        <p>{{post.tags__slug}}</p>
+                    </div>
+                {% endfor %}
+            {% else %}
+                <div class="snippet no-result-snippet"><p>There are no posts that match your search: {{request.GET.q}}.</p></div>
+            {% endif %}
+        </div>
+
+        <div id="users-grid-id" class="users-grid results-grid">
+            {% if user_list %}
+                {% for user in user_list %}
+                    <div class="user-snippet snippet">
+                        <a href="{% url 'profile' user.pk %}"><b>{{user.first_name}} {{user.last_name}}</b></a>
+                        <p>@{{user.username}}</p>
+                    </div>
+                {% endfor %}
+            {% else %}
+                <div class="snippet no-result-snippet"><p>There are no users that match your search: {{request.GET.q}}.</p></div>
+            {% endif %}
+        </div>
+
+        <div id="blocks-grid-id" class="blocks-grid results-grid">
+            {% if block_list %}
+                {% for block in block_list %}
+                    <div class="block-snippet snippet">
+                        <a href="{% url 'block' block.pk %}"><b>{{block.name}}</b></a>
+                        <p>{{block.description|safe|truncatechars:50}}</p>
+                    </div>
+                {% endfor %}
+            {% else %}
+                <div class="snippet no-result-snippet"><p>There are no blocks that match your search: {{request.GET.q}}.</p></div>
+            {% endif %}
+        </div>
+    </div>
+
+    {% else %}
+
+    <div class="blocks-intro">
+        {% for main in main_blocks %}
+            <div class="intro-block-snippet">
+                <h2><a href="{% url 'block' main.pk %}">{{main.name}}</a></h2>
+                <p class="population"><b>Population:</b> {{main.customuser_set.count}}</p>
+                <p>{{main.description|truncatechars:100}}</p>
+            </div>
+        {% endfor %}
+    </div>
+
+    {% endif %}    
+</div>
+
+<img class="background" src="{% static 'img/background-small-gap.svg' %}" alt="background city">
+
+{% endblock content %}

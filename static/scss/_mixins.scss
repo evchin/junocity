@@ -1,0 +1,38 @@
+// media query for mobile
+
+@mixin mq-m($width: 600px) {
+  @media (max-width: $width) {
+    @content;
+  }
+}
+// media query for desktop
+
+@mixin mq-d($width: 950px) {
+  @media (max-width: $width) {
+    @content;
+  }
+}
+
+// media query for wide
+
+@mixin mq-w($width: 1600px) {
+  @media (min-width: $width) {
+    @content;
+  }
+}
+
+// media query for height
+
+@mixin mq-h($height: 1000px) {
+  @media (min-height: $height) {
+    @content;
+  }
+}
+
+// special media query for signup
+
+@mixin mq-signup($height: 730px) {
+  @media (min-height: $height) {
+    @content;
+  }
+}

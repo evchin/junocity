@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <div class="new-post-form">
+        <h1>Create New Post</h1>
+        <form action="" method="post">
+            {% csrf_token %}
+            <table>
+                <tr>
+                    <th>Title</th>
+                    <td>{{form.title}}</td>
+                </tr>
+                <tr>
+                    <th>Body</th>
+                    <td>{{form.body}}</td>
+                </tr>
+                <tr>
+                    <th class="has-tooltip">
+                        <p>Block</p>
+                        <div class="tooltip">This is the block you will be posting to.</div>
+                    </th>
+                    <td>{{form.block}}</td>
+                </tr>
+                <tr>
+                    <th class="has-tooltip">
+                        <p>Tags</p>
+                        <div class="tooltip">A comma-separated list of values/words that describe your post.</div>
+                    </th>
+                    <td>{{form.tags}}</td>
+                </tr>
+            </table>
+            <button type="submit">Post</button>
+        </form>
+    </div>
+{% endblock content %} 

@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="70.124" height="69.124" viewBox="0 0 70.124 69.124">
+  <g id="settings-icon" transform="translate(-1805.39 -169.754)">
+    <g id="Ellipse_22" data-name="Ellipse 22" transform="translate(1823 187)" fill="none" stroke="#707070" stroke-width="5">
+      <circle cx="17.5" cy="17.5" r="17.5" stroke="none"/>
+      <circle cx="17.5" cy="17.5" r="15" fill="none"/>
+    </g>
+    <path id="Path_168" data-name="Path 168" d="M7518.174,10783.254h13.556v10.124h-13.556Z" transform="translate(-5682 -10613)" fill="#707070" stroke="#707070" stroke-width="1"/>
+    <path id="Path_169" data-name="Path 169" d="M7518.174,10783.254h13.556v10.124h-13.556Z" transform="translate(12658.268 -7320.636) rotate(90)" fill="#707070" stroke="#707070" stroke-width="1"/>
+    <path id="Path_170" data-name="Path 170" d="M7518.174,10783.254h13.556v10.124h-13.556Z" transform="translate(-5682 -10555)" fill="#707070" stroke="#707070" stroke-width="1"/>
+    <path id="Path_171" data-name="Path 171" d="M7518.174,10783.254h13.556v10.124h-13.556Z" transform="translate(12599.268 -7320.636) rotate(90)" fill="#707070" stroke="#707070" stroke-width="1"/>
+    <path id="Path_172" data-name="Path 172" d="M7518.174,10783.254h13.556v10.124h-13.556Z" transform="translate(4170.499 -12765.12) rotate(45)" fill="#707070" stroke="#707070" stroke-width="1"/>
+    <path id="Path_173" data-name="Path 173" d="M7518.174,10783.254h13.556v10.124h-13.556Z" transform="translate(14811.388 2531.863) rotate(135)" fill="#707070" stroke="#707070" stroke-width="1"/>
+    <path id="Path_174" data-name="Path 174" d="M7518.174,10783.254h13.556v10.124h-13.556Z" transform="matrix(-0.819, -0.574, 0.574, -0.819, 1797.108, 13378.722)" fill="#707070" stroke="#707070" stroke-width="1"/>
+    <path id="Path_175" data-name="Path 175" d="M7518.174,10783.254h13.556v10.124h-13.556Z" transform="matrix(0.819, -0.574, 0.574, 0.819, -10531.052, -4337.82)" fill="#707070" stroke="#707070" stroke-width="1"/>
+    <path id="Path_176" data-name="Path 176" d="M7499.857,10807.243l-1.893,4.616v11.63l1.893,4.973,8.989,6.719,5.554,2.7h11.71l2.878-2.151,8.079-8.369,1.238-3.874V10811.6l-.228-3.842-8.326-8.4-3.642-2.025H7514.4l-4.993,2.306Z" transform="translate(-5678 -10613)" fill="none" stroke="#707070" stroke-width="9"/>
+  </g>
+</svg>

@@ -1,0 +1,253 @@
+// Post Detail
+
+.post-detail {
+    text-align: left;
+    padding: 2em 0;
+    width: 90vw;
+    max-width: 50em;
+    margin: 4em auto 0;
+    position: relative;
+
+    .tags {
+        justify-content: start;
+    }
+
+    .add-comment-form {
+        textarea {
+            border: 1px solid $dark;
+            width: 100%;
+            box-shadow: none;
+            background: transparent;
+            margin: 1em auto;
+        }
+    }
+
+    .edit-post {
+        background: $medium;
+        padding: 1em;
+        margin: 1em 0;
+    }
+
+    .post-header {
+        margin-bottom: 1em;
+
+        .post-header-title {
+            display: flex;
+            align-content: center;
+
+            .bookmark-form {
+                display: flex;
+                margin-left: 1em;
+
+                button {
+                    height: 2rem;
+                    align-self: center;
+                    justify-self: center;
+
+                    img {
+                        height: 2rem;
+                    }
+                }
+            }
+
+        }
+    }
+
+    .post-body {
+        margin-bottom: 1em;
+    }
+
+    h1 {
+        font-size: 2rem;
+    }
+
+    .post-like-form {
+        margin-bottom: 3em;
+    }
+
+    .like-icon {
+        background: none;
+        border: none;
+        color: $black;
+        padding: 0;
+        margin: 0;
+        height: auto;
+
+        img {
+            margin-left: .5em;
+            object-fit: contain;
+            height: 1.5em;
+        }
+
+        &:hover {
+            background: none;
+            border: none;
+        }
+    }
+}
+
+.like-container {
+    display: flex;
+    align-content: center;
+
+    span {
+        display: flex;
+        justify-content: center;
+        align-content: center;
+        font-size: 1.2rem;
+    }
+}
+
+.comments-section {
+    margin-bottom: 5em;
+
+    .comment {
+        background: $medium;
+        padding: 1em;
+        margin-top: 1em;
+        position: relative;
+
+        .comment-edit-link {
+            position: absolute;
+            right: 1em;
+            top: 1em;
+            font-size: .8rem; 
+        }
+    }
+    .comment-body {
+        margin-top: .5em;
+    }
+
+    .like-container {
+        margin-top: .5em;
+        img {
+            height: 1.1rem;
+        }
+    
+        span {
+            font-size: 1rem;
+        }
+    }
+
+    .replies {
+        display: none;
+    }
+
+    .reply-link {
+        display: inline-flex;
+        align-items: flex-end;
+        padding-bottom: .2em;
+        margin-left: .5em;
+        min-height: 2em;
+
+        a {
+            margin-left: .3em;
+            text-decoration: underline;
+        }
+    }
+
+    .row {
+        display: inline-flex;
+        align-content: center;
+    }
+
+    .reply {
+        margin: 1em;
+        position: relative;
+        padding-left: 1.5em; 
+        border-left: 2px solid rgba($black, .2);
+    }
+
+    .reply-form {
+        margin: 1em;
+
+        textarea {
+            border: 1px solid rgba($dark, .4);
+            height: 5em;
+        }
+        button {
+            text-align: right;
+        }
+    }
+}
+
+// Create New Post
+
+.new-post-form {
+    margin: 4em auto 0;
+    padding: 2em;
+    width: 90vw;
+    max-width: 70em;
+
+    @include mq-d {
+        padding: 1em;
+    }
+
+    table {
+        margin: 0 auto 2em;
+        text-align: left;
+        width: 100%;
+
+        input {
+            width: 100%;
+        }
+    }
+}
+
+// edit post
+
+.edit-post {
+    form {
+        width: 90vw;
+        max-width: 70em;
+        margin: 0 auto;
+        text-align: left;
+
+        label {
+            margin-right: .5em;
+        }
+
+        label[for=id_body] {
+            display: none;
+        }
+
+        input, select, label {
+            margin-bottom: .8em;
+        }
+
+        input {
+            min-width: 50%;
+        }
+
+        textarea {
+            min-height: 50vh;
+        }
+    }
+}
+
+.helptext {
+    font-size: .9rem;
+    margin-left: 1em;
+}
+
+.post-body {
+    white-space: pre-line;
+}
+
+// delete post
+
+.delete {
+    button {
+        margin-top: 2em;
+    }
+}
+
+// Confirm delete comment
+
+.confirm-delete {
+    margin-top: 25vh;
+
+    button a {
+        color: $white;
+    }
+}

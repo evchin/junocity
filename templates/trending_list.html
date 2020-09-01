@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %} Trending {% endblock title %}
+
+{% block content %}
+    <div class="trending">
+        <h1>Trending Posts</h1>
+        <div class="post-list">
+            {% if trending_posts %}    
+                {% with trending_posts as posts %}
+                    {% include 'post_list.html' %}
+                {% endwith %}
+            {% else %}
+                <p>There are no posts trending right now.</p>
+            {% endif %}
+        </div>
+    </div>
+{% endblock content %}

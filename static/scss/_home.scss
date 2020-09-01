@@ -1,0 +1,234 @@
+.block-list {
+    position: fixed;
+    top: 4em;
+    left: 0;
+    bottom: 0;
+    width: 15em;
+    padding: 1em 1em 1em 0;
+    background: $dark-l;
+    color: $white;
+    text-align: left;
+
+    li {
+        list-style: none;
+        color: $white;
+        width: 100%;
+        padding: 1em 1em 1em 2em;
+        text-align: left;
+        font-size: 1rem;
+
+        @include mq-m {
+            font-size: .9rem;
+        }
+
+        &:hover {
+            background: $dark;
+        }
+    }
+
+    a {
+        color: $white;
+    }
+}
+
+.create-post-link {
+    position: absolute;
+    bottom: 5em;
+
+    @include mq-d {
+        position: relative;
+        bottom: 0;
+    }
+}
+
+.about-link {
+    position: absolute;
+    bottom: 2em;
+    text-decoration: underline;
+
+    * {
+        font-size: 0.7rem;
+    }
+
+    @include mq-d {
+        position: relative;
+        bottom: 0;
+    }
+}
+
+.bookmark-form {
+    button {
+        border: none;
+        background: none;
+        box-shadow: none;
+    }
+}
+
+.bookmark-icon {
+    height: 1.1rem;
+    display: inline-block;
+    padding: 0;
+    margin-top: .1em;
+    
+    img {
+        display: block;
+        height: 1.1rem;
+    }
+
+}
+
+.post-list {
+    position: fixed;
+    top: 4em;
+    right: 15em;
+    left: 15em;
+    bottom: 0;
+    text-align: left;
+    padding: 2em;
+    overflow-x: hidden;
+
+    .bookmark-icon {
+        position: absolute;
+        right: 1em;
+    }
+    
+    a {
+        color: $black;
+    }
+
+    .post {
+        position: relative;
+
+        .post-header {
+            padding-right: 12.5em;
+
+            @include mq-d {
+                padding-right: 3em;
+            }
+        }
+
+        &.green {
+            .post-header {
+                background: rgba($accent1, .4);
+            }
+            .post-body {
+                background: rgba($accent1, .2);
+            }
+        }
+
+        &.blue {
+            .post-header {
+                background: rgba($accent2, .4);
+            }
+            .post-body {
+                background: rgba($accent2, .2);
+            }
+        }
+    }
+
+    .post-list-title {
+        margin-bottom: 1em;
+        position: relative;
+
+        a {
+            text-decoration: underline solid black;
+        }
+    }
+
+    .post-likes-count {
+        position: absolute;
+        padding: .5em;
+        top: 0;
+        right: 2em;
+
+        @include mq-d {
+            position: relative;
+            right: 0;
+            padding: 0;
+
+        }
+    }
+
+    .post-title {
+        font-weight: $fw-b;
+    }
+
+    .post-header, .post-body {
+        padding: 0.5em 0.8em;
+        background: $white;
+    }
+}
+
+.home {
+    position: absolute;
+    z-index: 0;
+    .post-list {
+        overflow-y: scroll;
+        @include mq-d {
+            right: 0;
+        }
+
+        @include mq-m {
+            left: 0;
+        }
+    }
+}
+
+.trending-list {
+    position: fixed;
+    right: 0;
+    width: 15em;
+    top: 4em;
+    bottom: 0;
+    background: $dark-l;
+    color: $white;
+    overflow-y: scroll;
+    background: rgba($dark-l, .3);
+    padding: 1em;
+
+    @include mq-d {
+        display: none;
+    }
+
+    .trending-list-title {
+        margin-bottom: 1em;
+        color: $black;
+    }
+
+    .trending-post {
+        margin-bottom: 1em;
+        color: $black;
+        text-align: left;
+        padding: .5em;
+    }
+}
+
+.trending-link {
+    display: none;
+
+    @include mq-d {
+        display: block;
+        text-decoration: underline;
+    }
+}
+
+.trending {
+    margin: 6em auto 4em;
+    width: 90vw;
+    max-width: 70em;
+
+    .post-list {
+        position: relative;
+        top: 0;
+        left: 0;
+        bottom: 0;
+        right: 0;
+        margin: 0 auto;
+    }
+}
+
+.home::-webkit-scrollbar, .trending-list::-webkit-scrollbar, .post-list::-webkit-scrollbar {
+    width: 2px;
+    background: $white;
+    margin-left: 1em;
+}

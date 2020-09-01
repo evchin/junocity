@@ -1,0 +1,176 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block title %} My Profile {% endblock title %}
+
+{% block content %}
+<div class="profile-container go-left">
+    <div class="profile-body main-hero">
+        <div class="profile-intro">
+            {% if current_user.age < 65 %}
+                <img class="profile-pic green" src="{{profile_pic}}" >
+            {% else %}
+                <img class="profile-pic blue" src="{{profile_pic}}" >
+            {% endif %}
+            <h2>{{current_user.first_name}} {{current_user.last_name}}</h2>
+        </div>
+
+        {% if request.user == current_user %}
+            <div class="profile-meta">
+                <div class="profile-meta-header">
+                    <h1>@{{current_user.username}}</h1>
+                    <span><b>{{current_user.neighbors.count}} Neighbors</b></span>
+                </div>
+                <div class="profile-icons">
+                    <a href="{% url 'account_settings' %}"><img class="settings-icon" src="{% static 'img/settings-icon.png' %}" alt="settings"></a>
+                    <a href="{% url 'bookmarks_list' %}"><img class="bookmark-icon" src="{% static 'img/is-bookmark.svg' %}" alt="bookmarks"></a> 
+                </div>
+                <p>{{current_user.bio}}</p>
+            </div>
+        {% else %}
+        <div class="profile-meta profile-meta-widened">
+            <div class="profile-meta-header">
+                <h1>@{{current_user.username}}</h1>
+                <span class=""><b>{{current_user.neighbors.count}} Neighbors</b></span>
+            </div>
+            <p>{{current_user.bio}}</p>
+            {% if button_status == 'not_neighbor' %}
+                <a href="{% url 'send_neighbor_request' current_user.pk %}"><button>Send Neighbor Request</button></a>
+            {% elif button_status == 'neighbor_request_sent' %}
+                <a href="{% url 'cancel_neighbor_request' current_user.pk %}"><button>Cancel Neighbor Request</button></a>
+            {% elif button_status == 'neighbor_request_received' %}
+            <div class="request-btns">
+                <a href="{% url 'accept_neighbor_request' current_user.pk %}"><button>Accept Neighbor Request</button></a>
+                <a href="{% url 'ignore_neighbor_request' current_user.pk %}"><button>Ignore Neighbor Request</button></a>
+            </div>
+            {% else %}
+                <p><b>You are neighbors with {{current_user.username}}!</b></p>
+            {% endif %}
+        </div>
+        {% endif %}
+
+        <div class="profile-blocks">
+            <h2 class="profile-subtitle">Blocks</h2>
+            {% if current_user.blocks.count != 0 %}
+                {% for block in current_user.blocks.all %}
+                    <div class="profile-block">
+                        <a href="{% url 'block' block.pk %}"><b>{{block.name}}</b></a>
+                        <p>{{block.description}}</p>
+                    </div>
+                {% endfor %}
+            {% else %}
+                <p>This user is not part of any blocks.</p>
+            {% endif %}
+        </div>
+
+        {% if request.user == current_user %}
+            <div class="profile-posts">
+                <div class="post-list">
+                    <h2 class="profile-subtitle">Posts</h2>
+                    {% if posts %}
+                        {% with posts as posts %}
+                            {% include 'post_list.html' %}
+                        {% endwith %}
+                    {% else %}
+                        <p>This user has no posts.</p>
+                    {% endif %}
+                </div>
+            </div>
+        {% else %}
+            <div class="profile-posts profile-posts-widened">
+                <div class="post-list">
+                    <h2 class="profile-subtitle">Posts</h2>
+                    {% if posts %}
+                        {% with posts as posts %}
+                            {% include 'post_list.html' %}
+                        {% endwith %}
+                    {% else %}
+                        <p>This user has no posts.</p>
+                    {% endif %}
+                </div>
+            </div>
+        {% endif %}
+
+        {% if request.user == current_user %}
+            
+            <div class="profile-neighbors">
+                <h2 class="profile-subtitle">Neighbors</h2>
+                <div class="profile-list received-request-list">
+                    <h2 class="profile-subtitle">Received Neighbor Requests</h2>
+                    {% if received_nrequests %}
+                        {% for r in received_nrequests %}
+                            <div class="profile-request">
+                                <div class="neighbor-meta">
+                                    <a href="{% url 'profile' r.from_user.pk %}"><b>{{r.from_user.first_name}} {{r.from_user.last_name}}</b></a>
+                                    <p>@{{r.from_user.username}}</p>
+                                </div>
+                                <div class="request-btns">
+                                    <a href="{% url 'accept_neighbor_request' r.from_user.pk %}"><button>Accept</button></a>
+                                    <a href="{% url 'ignore_neighbor_request' r.from_user.pk %}"><button>Ignore</button></a>
+                                </div>
+                            </div>
+                        {% endfor %}
+                    {% else %}
+                        <p>You have no new neighbor requests.</p>
+                    {% endif %}
+                </div>
+                <div class="profile-list sent-request-list">
+                    <h2 class="profile-subtitle">Sent Neighbor Requests</h2>
+                    {% if sent_nrequests %}
+                        {% for s in sent_nrequests %}
+                            <div class="profile-request">
+                                <div class="neighbor-meta">
+                                    <a href="{% url 'profile' s.to_user.pk %}"><b>{{s.to_user.first_name}} {{s.to_user.last_name}}</b></a>
+                                    <p>{{s.to_user.username}}</p>
+                                </div>
+                                <a class="request-btn" href="{% url 'cancel_neighbor_request' s.to_user.pk %}"><button>Cancel</button></a>
+                            </div>
+                        {% endfor %}
+                    {% else %}
+                        <p>You have not sent any new neighbor requests.</p>
+                    {% endif %}
+                </div>
+                <div class="profile-list neighbors-list">
+                    <h2 class="profile-subtitle">Your Neighbors</h2>
+                    {% if neighbors %}
+                        {% for neighbor in neighbors %}
+                            <div class="profile-neighbor">
+                                <div class="neighbor-meta">
+                                    <a class="neighbor-link" href="{% url 'profile' neighbor.pk %}">
+                                        <b>{{neighbor.first_name}} {{neighbor.last_name}}</b>
+                                    </a>
+                                    <p>@{{neighbor.username}}</p>
+                                </div>
+                                <a class="neighbor-btn" href="{% url 'remove_neighbor' neighbor.pk %}"><button>Remove</button></a>
+                            </div>
+                        {% endfor %}
+                    {% else %}
+                        <p>You have no neighbors.</p>
+                    {% endif %}
+                </div>
+    
+                {% if users %}
+                    <div class="profile-list">
+                        <h2 class="profile-subtitle">Suggested Neighbors</h2>
+                        {% for u in users %}
+                            <div class="profile-request">
+                                <div class="neighbor-meta">
+                                    <a href="{% url 'profile' u.pk %}"><b>{{u.first_name}} {{u.last_name}}</b></a>
+                                    <p>@{{u.username}}</p>
+                                </div>
+                                <a class="request-btn" href="{% url 'send_neighbor_request' u.pk %}"><button>Send Request</button></a>
+                            </div>
+                        {% endfor %}
+                    </div>
+                {% endif %}
+            </div>
+
+        {% else %}
+
+            
+
+        {% endif %}
+    </div>
+</div>
+{% endblock %}

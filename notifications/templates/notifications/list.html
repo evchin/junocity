@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+{% load notifications_tags %}
+{% load static %}
+{% register_notify_callbacks callbacks='fill_notification_menu,fill_notification_badge' %}
+
+
+
+
+{% block content %}
+
+<div class="notifications-container go-left">
+  <ul class="notifications">
+
+    <h1>Activity</h1>
+    <h2 class="activity-subtitle">You have {% live_notify_badge %} unread notifications.</h2>
+    <div class="notifications-btns">
+      <a href="{% url 'notifications:mark_all_as_read' %}"><button>Mark All as Read</button></a>
+      <a href="{% url 'notifications:all' %}"><button>See All Notifications</button></a>
+      <a href="{% url 'notifications:unread' %}"><button>See Unread Notifications Only</button></a>
+    </div>
+  
+  
+    {% live_notify_list %}
+  
+    {% for notice in notifications %}
+      {% include 'notifications/notice.html' %}
+    {% endfor %}
+  
+  </ul>
+</div>
+
+<img class="background" src="{% static 'img/background-small-gap.svg' %}" alt="background city">
+
+{% endblock %}
+
+
+
+<script src="{% url 'notifications/notify.js' %}" type="text/javascript"></script>
+{% register_notify_callbacks callbacks='fill_notification_list,fill_notification_badge' %}

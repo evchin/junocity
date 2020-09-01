@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="45.037" height="36.053" viewBox="0 0 45.037 36.053">
+  <g id="dislike-button" transform="translate(-193 -474.447)">
+    <path id="Path_124" data-name="Path 124" d="M7282.855,7056.617s9.315,3.348,10.872,6.552.574,3.677,1.948,5.024,2.517,1.569,3.539,0,1.146-2.693.567-5.939c-.139-.778-1.534-6.1-1.534-6.1a34.691,34.691,0,0,0,6.848.278c.669-.044,1.84.116,2.859.082a1.691,1.691,0,0,0,.867-.34c.365-.164.692-.884.692-.884l.5-1.047c-.127-.408.3.17.227-1.178s-1.987-2.122-1.987-2.122l1.163.232.093-.143,2.1-.089a4.676,4.676,0,0,0,.746-3.938c-.1-.169-.268-.645-.527-1.1a4.328,4.328,0,0,0-1.156-1.41c-.4-.278.164.4.076.158-.014-.094-.414.05-.747-.29,0,0,.748-2,.4-2.855a7.6,7.6,0,0,1-.4-1.19,1.282,1.282,0,0,0-.415-.637,2.6,2.6,0,0,0-.866-.3c-.489-.092-3.211.5-3.15,0l.408-1.365a4.076,4.076,0,0,0-.122-1.364,4.686,4.686,0,0,0-.767-1.317c.027-.254-2.265-.272-7.2-.4h0c-1.78-.045-2.644-.136-7.721-.692-4.736-.172-6.16,2.91-6.808,2.8" transform="translate(-7075 -6559.288)" fill="#aaa8a8" stroke="#383838" stroke-linecap="round" stroke-width="1"/>
+    <g id="Rectangle_34" data-name="Rectangle 34" transform="translate(193 474.468)" fill="#aaa8a8" stroke="#383838" stroke-width="1">
+      <rect width="16" height="25" rx="3" stroke="none"/>
+      <rect x="0.5" y="0.5" width="15" height="24" rx="2.5" fill="none"/>
+    </g>
+    <path id="Path_129" data-name="Path 129" d="M5983.743,7049.467h-9.459" transform="translate(-5748.159 -6564.276)" fill="#d33333" stroke="#383838" stroke-linecap="round" stroke-width="1"/>
+    <path id="Path_130" data-name="Path 130" d="M5979.817,7055.727l-8.465-.5" transform="translate(-5745 -6564)" fill="#d33333" stroke="#383838" stroke-linecap="round" stroke-width="1"/>
+    <path id="Path_131" data-name="Path 131" d="M5971.02,7044.395l4.784-.131" transform="translate(-5745 -6564)" fill="#d33333" stroke="#383838" stroke-linecap="round" stroke-width="1"/>
+  </g>
+</svg>

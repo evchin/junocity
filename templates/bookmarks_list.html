@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block title %} Bookmarks List {% endblock title %}
+
+{% block content %}
+
+    <div class="bookmarks-list">
+        <a class="back-arrow" href="{% url 'profile' request.user.pk %}">
+            <img src="{% static 'img/back-arrow.svg' %}" alt=""> 
+            <span>Back to Profile</span>
+        </a>
+        <h1>My Bookmarks</h1>
+        <div class="post-list">
+            {% if bookmarks %}
+                {% with bookmarks as posts %}
+                    {% include 'post_list.html' %}
+                {% endwith %}
+            {% else %}
+                <p style="text-align: center;">You have not bookmarked any posts yet.</p>
+            {% endif %}
+        </div>
+    </div>
+
+{% endblock content %}

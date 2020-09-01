@@ -1,0 +1,70 @@
+{% load sass_tags %}
+{% load notifications_tags %}
+{% load postman_tags %}
+{% postman_unread as unread_count %}
+{% load static %}
+
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <title>{% block title %}Junocity{% endblock title %}</title>
+        <!-- <link href="{% static '/main.css' %}" rel="stylesheet" type="text/css"/> -->
+        <link href="{% sass_src 'main.scss' %}" rel="stylesheet" type="text/css"/>
+        <link href="{% static 'postman/css/postman.css' %}" rel="stylesheet" type="text/css"/>
+        {% block extrahead %}
+        {% endblock extrahead %}
+    </head>
+    <body>
+        {% block content %}
+        {% endblock content %}
+        {% block postman_menu %}
+        {% endblock postman_menu %}
+        <header>
+            {% if user.is_authenticated %}
+                <a href="{% url 'home' %}"><img class="logo-text" src="{% static 'img/logo.svg' %}" alt=""></a>
+            {% else %}
+                <a href="{% url 'intro' %}"><img class="logo-text" src="{% static 'img/logo-text.svg' %}" alt=""></a>
+            {% endif %}
+            
+            <nav class="nav">
+                {% if user.is_authenticated %}
+                    <ul class="styled-list">
+                        <li><a href="{% url 'home' %}" class="nav-link"><img class="nav-icon" src="{% static 'img/home-icon.svg' %}" alt="">Home</a></li>
+                        <li><a href="{% url 'browse' %}" class="nav-link"><img class="nav-icon" src="{% static 'img/browse-icon.svg' %}" alt="">Browse</a></li>
+                        <li><a href="/messages" class="nav-link"><img class="nav-icon" src="{% static 'img/inbox-icon.svg' %}" alt="">Inbox {% if unread_count %} <span class="notify-badge">{{ unread_count }}</span>{% endif %}</a></li>
+                        <li><a href="/activity" class="nav-link"><img class="nav-icon" src="{% static 'img/activity-icon.svg' %}" alt="">Activity{% if live_notify_badge %}<span class="notify-badge">{% live_notify_badge%}</span>{% endif %}</a></li>
+                        <li class="dropdown">
+                            <button class="dropbtn">
+                                <a class="nav-link" href="{% url 'profile' user.pk %}"><img class="nav-icon" src="{% static 'img/profile-icon.svg' %}" alt="">{{ user.username }}</a>
+                                <i class="fa fa-caret-down"></i>
+                            </button>
+                            <div class="dropdown-content">
+                                <a href="{% url 'profile' user.pk %}">Profile</a>
+                                <a href="{% url 'logout' %}">Log Out</a>
+                            </div>
+                        </li>
+                    </ul>
+                {% else %}
+                    <ul class="styled-list">
+                        <li><a class="nav-link" href="{% url 'about' %}">About</a></li>
+                        <li><a class="nav-link" href="{% url 'login' %}">Log In</a></li>
+                        <li><a class="nav-link" href="{% url 'signup' %}">Sign up</a></li>
+                    </ul>
+                {% endif %}
+            </nav>
+            <div class="nav-toggle">
+                <div class="hamburger"></div>
+            </div>
+        </header>
+        <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha384-xBuQ/xzmlsLoJpyjoggmTEz8OWUFM0/RC5BsqQBDX2v5cMvDHcMakNTNrHIW2I5f" crossorigin="anonymous"></script>
+        <script src="{% static 'js/main.js' %}"></script>
+        <script>
+            var is_bookmark_url = "{% static 'img/is-bookmark.svg' %}";
+            var bookmark_url = "{% static 'img/bookmark.svg' %}";
+            var like_button = "{% static 'img/like-button.svg' %}";
+            var liked_button = "{% static 'img/like-button-liked.svg' %}";
+        </script>
+    </body>
+</html>

@@ -1,0 +1,260 @@
+#postman {
+    margin-top: 4em;
+    margin-left: 15em;
+    background: #EEEEEE;
+    text-align: left;
+    padding: 1em 2em;
+    position: relative;
+    z-index: 0;
+}
+
+#postman_menu {
+    position: fixed;
+    top: 4em;
+    left: 0;
+    height: 100vh;
+    width: 15em;
+    text-align: left;
+    background: #797878;
+}
+
+#postman_menu > a > li {
+    padding: 1.5em;
+    padding-left: 2em;
+}
+
+#postman_menu > a {
+    color: white;
+    background: #797878;
+    width: 100%;
+}
+
+#postman_menu > a > li:hover {
+    background: #555252;
+}
+
+#pm_byModes {
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    top: 3em;
+    right: 3em;
+    text-align: left;
+    padding: 0 .5em .5em 0;
+}
+
+.pm_by-mode {
+    background: #555252;
+    color: white;
+    border-radius: 0;
+    padding: .4em .8em;
+}
+
+.pm_by-mode a {
+    color: white;
+    opacity: .5;
+}
+
+#pm_buttons {
+    display: flex;
+}
+
+#pm_buttons > button {
+    margin-right: .5em;
+    margin-bottom: 1em;
+}
+
+#pm_messages {
+    width: 100%;
+    text-align: left;
+}
+
+table {
+    border-collapse: collapse;
+    margin-bottom: 1em;
+}
+
+textarea {
+    padding: 1em;
+    margin-right: .5em;
+}
+
+tr {
+    background: #CCCCCC;
+}
+
+table td > input {
+    /* border: .1px solid black; */
+    box-shadow: none;
+    padding: .5em;
+    background: white;
+}
+
+tr:hover {background-color: #DDDDDD;}
+
+th, td {
+    padding-right: 1.5em;
+    padding: 1em;
+    color: black;
+}
+
+th > a {
+    color: black;
+}
+
+th > a:hover {
+    opacity: .5;
+}
+
+.pm_message {
+    background: #DDDDDD;
+    padding: .8em;
+    margin-bottom: .8em;
+}
+
+.pm_body {
+    padding-top: .5em;
+}
+
+.pm_header {
+    font-size: .9rem;
+    padding-bottom: .5em;
+    border-bottom: .12px solid #999999;
+}
+
+.pm_sender, .pm_recipient {
+    font-weight: 700;
+}
+
+.pm_btn, .pm_action {
+    background: #555252;
+    border: 1px solid #555252; 
+    color: white;
+    padding: 0.5em .8em;
+    margin-right: 0.5em;
+    margin-bottom: 1em;
+}
+
+.pm_btn:hover, .pm_action:hover {
+    color: black;
+    background: white;
+}
+
+.inbox-form {
+    display: flex;
+    margin-bottom: 1em;
+    margin-top: 1em;
+}
+
+.form-subtitle {
+    margin-bottom: 1em;
+}
+
+#id_body {
+    width: 100%;
+    margin-bottom: 1em;
+    box-shadow: none;
+    border: none;
+}
+
+.write-form table {
+    width: 100%;
+}
+
+#postman-menu {
+    overflow-x: hidden;
+    transition: all ease-in-out 250ms;
+    z-index: 100;
+}
+
+.inbox-nav-toggle {
+    display: none;
+}
+
+@media screen and (max-width: 950px) {
+    #postman {
+        margin: 4em auto 0;
+        padding: 1em 2em;
+    }
+   
+    #postman_menu {
+        position: fixed;
+        background: #797878;
+        height: calc(100vh - 4em);
+        width: 100vw;
+        max-width: 15em;
+        top: 4em;
+        left: -15em;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-around;
+        transition: all ease-in-out 250ms;
+    }
+
+    #postman_menu.is-open {
+        left: 0;
+    }
+
+    .inbox-nav-toggle {
+        position: fixed;
+        display: flex;
+        cursor: pointer;
+        left: 5em;
+        top: 1em;
+        z-index: 100;
+        height: 2em;
+    }
+
+    .inbox-nav-toggle.nav-open {
+        display: none;
+    }
+
+    .inbox-hamburger {
+        display: block;
+        color: white;
+        z-index: 99;
+        justify-self: center;
+        align-self: center;
+    }
+}
+
+@media screen and (max-width: 600px) {
+    #postman {
+        overflow: scroll;
+    }
+    #pm_byModes {
+        position: relative;
+        display: flex;
+        flex-wrap: wrap;
+        flex-direction: row;
+        top: 0;
+        right: 0;
+        text-align: left;
+        padding: 0 .5em .5em 0;
+    }
+    
+    .pm_by-mode {
+        padding: .4em .8em;
+    }
+
+    #pm_buttons {
+        width: 100%;
+        justify-content: space-between;
+    }
+
+    #pm_buttons button {
+        height: auto;
+    }
+
+    table {
+        max-width: 100%;
+    }
+    
+}
+
+.pm_message.pm_deleted             { text-decoration: line-through; }
+.pm_message.pm_deleted .pm_body    { display: none; }
+.pm_message.pm_archived            { font-style: italic; color: grey; }
+.pm_message.pm_unread .pm_subject  { font-weight: bolder; }
+.pm_message.pm_pending .pm_header  { background-color: #FFC; }
+.pm_message.pm_rejected .pm_header { background-color: #FDD; }

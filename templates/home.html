@@ -1,0 +1,60 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block title %} Junocity Home {% endblock title %}
+
+{% block content %}
+    <div class="main-hero home go-left">
+
+        <div class="post-list">
+            <div class="post-list-header">
+                {% if pk %}
+                    <h3 class="post-list-title">Recent Posts from <a href="{% url 'block' pk %}">{{ root }}</a></h3>
+                {% else %}
+                    <h3 class="post-list-title">Recent Posts from {{ root }}</h3>
+                {% endif %}
+            </div>
+
+            {% if posts %}    
+                {% with posts as posts %}
+                    {% include 'post_list.html' %}
+                {% endwith %}
+            {% else %}
+                <p>No posts exist here.</p>
+            {% endif %}
+        </div>
+
+        <ul class="block-list">
+            <a href="{% url 'home' %}"><li>My Block</li></a>
+            {% for block in blocks %}
+                <a class="list-link" href="{% url 'home_block' block.pk %}"><li>{{block.name}}</li></a>
+            {% endfor %}
+            <a href="{% url 'browse' %}"><li>+ Add a Block</li></a>
+            <a href="{% url 'post_new' %}"><li class="create-post-link">+ Create a Post</li></a>
+            <a class="trending-link" href="{% url 'trending_list' %}"><li>Trending Posts</li></a>
+            <a href="{% url 'about' %}"><li class="about-link">About Junocity</li></a>
+        </ul>
+
+        <div class="trending-list">
+            <h3 class="trending-list-title"><a href="{% url 'trending_list' %}">Trending</a></h3>
+            {% if trending_posts %}
+                {% for post in trending_posts %}
+                    <div class="trending-post">
+                        <a href="{% url 'post_detail' post.pk %}"><b>{{post.title}}</b></a>
+                        <p>by <a href="{% url 'profile' post.author.pk %}">{{post.author}}</a></p>
+                    </div>
+                {% endfor %}
+            {% else %}
+                <p style="color: black;">There are no trending posts right now.</p>
+            {% endif %}
+        </div>
+
+    </div>
+    <div class="block-nav-toggle">
+        <div class="block-hamburger">{{root|truncatechars:15}}  ▼</div>
+    </div>
+{% endblock content %}
+
+<script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha384-xBuQ/xzmlsLoJpyjoggmTEz8OWUFM0/RC5BsqQBDX2v5cMvDHcMakNTNrHIW2I5f" crossorigin="anonymous"></script>
+<script src="{% static 'js/main.js' %}"></script>

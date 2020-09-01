@@ -1,0 +1,92 @@
+*, *::before, *::after {
+    box-sizing: border-box;
+    scroll-behavior: smooth;
+    margin: 0;
+    padding: 0;
+}
+
+
+body {
+    line-height: 1.4;
+    overflow-x: hidden;
+    font-family: $ff2;
+    text-align: center;
+    background: $light;
+    text-decoration-thickness: .3px;
+}
+
+h1 {
+    font-size: 2rem;
+    font-family: $ff1;
+    font-weight: $fw-n;
+
+    @include mq-m {
+        font-size: 1.5rem;
+    }
+}
+
+h2 {
+    font-size: 1.5rem;
+    font-family: $ff2;
+    font-weight: $fw-n;
+
+    @include mq-m {
+        font-size: 1.2rem;
+    }
+}
+
+p {
+    @include mq-m {
+        font-size: 0.9rem;
+    }
+}
+
+a {
+    text-decoration: none;
+    color: $black;
+
+    @include mq-m {
+        font-size: 0.9rem;
+    }
+}
+
+form {
+    input {
+        padding: .5em;
+        border: none;
+        box-shadow: none;
+        text-align: left;
+    }
+
+    th {
+        position: relative;
+        &:hover {
+            .tooltip {
+                display: block;
+                position: absolute;
+                bottom: 0;
+                right: 100%;
+                width: 100%;
+                padding: 1em;
+                background: $medium;
+            }
+        }
+    }
+}
+
+button {
+    border-radius: 0;
+    border: 1px solid $dark;
+    background: $dark;
+    color: $white;
+    padding: 0 1em;
+    height: 2.5em;
+    align-self: flex-end;
+
+    &:hover {
+        background: $light;
+        border: 1px solid $dark;
+        color: $dark;
+        cursor: pointer;
+    }
+}

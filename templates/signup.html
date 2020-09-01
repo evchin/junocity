@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %} Sign Up {% endblock title %}
+
+{% block content %}
+    <div class="hero signup">
+        <div class="form-container">
+            <h1>Sign Up</h1>
+            <form class="main-form" method="POST" action="{% url 'signup' %}">
+                {% csrf_token %}
+                {{form.first_name}}
+                {{form.last_name}}
+                {{form.username}}
+                {{form.email}}
+                {{form.birthday}}
+                {{form.password1}}
+                {{form.password2}}
+                {{form.captcha}}
+                <button type="submit" value="Sign Up">Sign Up</button>
+            </form>{{form.errors}}
+            <div class="already-citizen-link">
+                Already a Junocity citizen? <a href="{% url 'login' %}"><b>Login</b></a>
+            </div>
+        </div>
+    </div>
+    <img class="background" src="{% static 'img/background-small-gap.svg' %}" alt="background city">
+    <script>
+        var form_fields = document.getElementsByTagName('input')
+        form_fields[1].placeholder='First Name';
+        form_fields[2].placeholder='Last Name';
+        form_fields[3].placeholder='Username';
+        form_fields[4].placeholder='Email';
+        form_fields[5].placeholder='Birthday (MM/DD/YYYY)';
+        form_fields[6].placeholder='Enter Password';
+        form_fields[7].placeholder='Re-enter Password';
+
+        for (var field in form_fields){	
+            form_fields[field].className += ' form-control'
+        }
+    </script>
+{% endblock content %}

@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+
+{% block title %}Blocks{% endblock title %}
+
+{% block content %}
+    {% for block in block_list %}
+        <div>
+            <div>
+                <span>{{ block.title }}</span>;
+                <span>by {{ block.description }}</span>
+            </div>
+            <div>
+                <p>{{ post.body }}</p>
+                <a href="">Join</a> | 
+                <a href="">Report</a>
+            </div>
+        </div>
+    {% endfor %}
+{% endblock content %}

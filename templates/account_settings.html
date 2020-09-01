@@ -1,0 +1,55 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block title %} My Profile {% endblock title %}
+
+{% block content %}
+
+<div class="account-settings">
+    <a class="back-arrow" href="{% url 'profile' request.user.pk %}">
+        <img src="{% static 'img/back-arrow.svg' %}" alt=""> 
+        <span>Profile</span>
+    </a>
+    <h1>Account Settings</h1>
+    <form method="POST" action="" enctype="multipart/form-data">
+        {% csrf_token %}
+        <table>
+            <tr>
+                <th>Username</th>
+                <td>{{form.username}}</td>
+            </tr>
+            <tr>
+                <th>First Name</th>
+                <td>{{form.first_name}}</td>
+            </tr>
+            <tr>
+                <th>Last Name</th>
+                <td>{{form.last_name}}</td>
+            </tr>
+            <tr>
+                <th>Bio</th>
+                <td>{{form.bio}}</td>
+            </tr>
+            <tr>
+                <th>Birthday (YYYY-MM-DD)</th>
+                <td>{{form.birthday}}</td>
+            </tr>
+            <tr>
+                <th>Profile Pic</th>
+                <td>{{form.profile_pic}}</td>
+            </tr>
+            <tr>
+                <th>Password</th>
+                <td>Reset password <a href="{% url 'reset_password' %}"><b>here</b></a>.</td>
+            </tr>
+        </table>
+        <button type="submit" name="Update Information">Update</button>
+        <button class="logout-button" ><a href="{% url 'logout' %}">Logout</a></button>
+    </form> 
+
+{{form.errors}}
+
+</div>
+
+{% endblock content %}

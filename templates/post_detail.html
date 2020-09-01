@@ -1,0 +1,143 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block content %}
+
+<div class="container">
+    <div class="post-detail">
+        <!-- <a class="back-arrow" href=""><img class="back-arrow" src="{% static 'img/back-arrow.svg' %}" alt=""> Back to All Posts</a> -->
+        <div class="post-entry">
+            <div class="post-header">
+                <div class="post-header-title">
+                    <h1>{{ post.title }}</h1>
+                    <form class='bookmark-form' method='POST' action="{% url 'change_bookmark' post.pk %}" data-url='{{ request.build_absolute_uri|safe }}'>
+                        {% csrf_token %}
+                        <input type="text" value="{{post.pk}}" id="post-pk" hidden>
+                        {% if post in user.bookmarks.all %}
+                            <button class="bookmark-icon" type='submit'><img id="bm-{{post.pk}}" onclick="changeBookmark(this.id)" src="{% static 'img/is-bookmark.svg' %}" alt="bookmark"></button>
+                        {% else %}
+                            <button class="bookmark-icon" type='submit'><img id="bm-{{post.pk}}" onclick="changeBookmark(this.id)" src="{% static 'img/bookmark.svg' %}" alt="bookmark"></button>
+                        {% endif %}
+                    </form>
+                </div>
+                <p>by <b><a href="{% url 'profile' post.author.pk %}">{{ post.author }}</a></b> | {{ post.published }}</p>
+                <div class="tags">
+                    <div class="tags-content">
+                        {% if post.tags %}
+                            <span class="tags-title"><b>Tags </b></span>
+                            {% for tag in post.tags.all %}
+                                <p>{{tag.name}}</p>
+                            {% endfor %}
+                        {% endif %}
+                    </div>
+                </div>
+                {% if request.user == post.author %}
+                    <div class="edit-post"><a href="{% url 'post_edit' post.pk %}">Edit</a> | <a href="{% url 'post_delete' post.pk %}">Delete</a></div>
+                {% endif %}
+            </div>
+            <div class="post-body">{{ post.body }}</div>
+            <form class='like-form post-like-form' method='POST' action="{% url 'change_post_like' post.pk %}" data-url='{{ request.build_absolute_uri|safe }}'>
+                {% csrf_token %}
+                <input type="text" value="{{post.pk}}" id="pk" hidden>
+                {% if request.user in post.likes.all %}
+                <div class="like-container">
+                    <span id="post-like-count-{{comment.pk}}">{{post.likes.count}}</span> 
+                    <button class="like-icon" type='submit'><img id="like-post-{{post.pk}}" onclick="changeLike(this.id)" src="{% static '/img/like-button-liked.svg' %}" alt="like post"></button>
+                </div>
+                {% else %}
+                <div class="like-container">
+                    <span id="post-like-count-{{comment.pk}}">{{post.likes.count}}</span>
+                    <button class="like-icon" type='submit'><img id="like-post-{{post.pk}}" onclick="changeLike(this.id)" src="{% static '/img/like-button.svg' %}" alt="like post"></button>
+                </div>
+                {% endif %}
+            </form>
+        </div>
+
+
+        <div class="comments-section">
+            <h1>Comments</h1>
+            <form class="add-comment-form" action="" method="post">
+                {% csrf_token %}
+                <input type="hidden" name="post_id" value="{{ comment.post.id }}">
+                {{ comment_form.content }}
+                <button type="submit">Post</button>
+            </form>
+            {% if comments %}
+                {% for comment in comments %}
+                    <div class="comment">
+                        <p><b><a href="{% url 'profile' comment.author.pk %}">{{comment.author}}</a></b> | {{comment.published}}</p>
+                        {% if comment.author == request.user %}
+                        <span class="comment-edit-link"><a href="{% url 'delete_comment' comment.pk %}">Delete</a></span>
+                        {% endif %}
+                        <p class="comment-body">{{comment.content}}</p>
+                        <div class="row">
+                            <form class='like-form' method='POST' action="{% url 'change_comment_like' comment.pk %}" data-url='{{ request.build_absolute_uri|safe }}'>
+                                {% csrf_token %}
+                                <input type="text" value="{{comment.pk}}" id="pk" hidden>
+                                {% if request.user in comment.likes.all %}
+                                <div class="like-container">
+                                    <span id="like-count-{{comment.pk}}">{{comment.likes.count}}</span> 
+                                    <button class="like-icon" type='submit'><img id="like-comment-{{comment.pk}}" onclick="changeLike(this.id)" src="{% static '/img/like-button-liked.svg' %}" alt="like post"></button>
+                                </div>
+                                {% else %}
+                                <div class="like-container">
+                                    <span id="like-count-{{comment.pk}}">{{comment.likes.count}}</span> 
+                                    <button class="like-icon" type='submit'><img id="like-comment-{{comment.pk}}" onclick="changeLike(this.id)" src="{% static '/img/like-button.svg' %}" alt="like post"></button>
+                                </div>
+                                {% endif %}
+                            </form>
+                            <span class="reply-link"><p>{% if comment.children.count > 0 %} | {{comment.children.count}} Comments {% endif %} | </p> <a href="#">Reply</a></span>
+                        </div>
+                        <div class="replies">
+                            {% for child in comment.children %}
+                                <div class="reply">
+                                    <p><b><a href="{% url 'profile' comment.author.pk %}">{{child.author}}</a></b> | {{child.published}}</p>
+                                    {% if child.author == request.user %}
+                                    <span class="comment-edit-link"><a href="{% url 'delete_comment' comment.pk %}">Delete</a></span>
+                                    {% endif %}
+                                    <p class="comment-body">{{child.content}}</p>
+                                    <form class='like-form' method='POST' action="{% url 'change_comment_like' comment.pk %}" data-url='{{ request.build_absolute_uri|safe }}'>
+                                        {% csrf_token %}
+                                        <input type="text" value="{{comment.pk}}" id="pk" hidden>
+                                        <div class="like-container">
+                                            {% if request.user in comment.likes.all %}
+                                            <span id="like-count-{{child.pk}}">{{comment.likes.count}}</span> 
+                                            <button class="like-icon" type='submit'><img id="like-comment-{{child.pk}}" onclick="changeLike(this.id)" src="{% static '/img/like-button-liked.svg' %}" alt="like comment"></button>
+                                            {% else %}
+                                            <span id="like-count-{{child.pk}}">{{comment.likes.count}}</span> 
+                                            <button class="like-icon" type='submit'><img id="like-comment-{{child.pk}}" onclick="changeLike(this.id)" src="{% static '/img/like-button.svg' %}" alt="like comment"></button>
+                                            {% endif %}
+                                        </div>
+                                    </form>
+                                </div>
+                            {% endfor %}
+                            <form class="add-comment-form reply-form" action="" method="post">
+                                {% csrf_token %}
+                                <input type="hidden" name="parent_id" value="{{ comment.id }}">
+                                <input type="hidden" name="post_id" value="{{ comment.post.id }}">
+                                {{ comment_form.content }}
+                                <button type="submit">Reply</button>
+                            </form>
+                        </div>
+                    </div>
+                {% endfor %}
+            {% else %}
+                <div class="comment">
+                    <p>There are no comments yet.</p>
+                </div>
+            {% endif %}
+        </div>
+    </div>
+</div>
+<script>
+    var form_fields = document.getElementsByTagName('textarea')
+    form_fields[0].placeholder='Add Comment';
+    var i;
+    for (i = 1; i < form_fields.length; i++) form_fields[i].placeholder = 'Reply';
+</script>
+
+{% endblock content %}
+
+<script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha384-xBuQ/xzmlsLoJpyjoggmTEz8OWUFM0/RC5BsqQBDX2v5cMvDHcMakNTNrHIW2I5f" crossorigin="anonymous"></script>
+<script src="{% static 'js/main.js' %}"></script>

@@ -1,0 +1,100 @@
+.hero {
+    position: fixed;
+    height: 100vh;
+    width: 100vw;
+    display: flex;
+    background: transparent;
+    margin: 4em auto 0;
+}
+
+.signup {
+    display: flex;
+    flex-direction: column;
+
+    .form-container {
+        display: flex;
+        justify-content: start;
+        align-content: flex-start;
+        overflow-y: scroll;
+
+        @include mq-signup {
+            justify-content: center;
+            align-content: center;
+        }
+
+        .main-form button {
+            margin: 0 auto;
+            padding: 0.8em 2em;
+            height: auto;
+        }
+    }
+}
+
+.form-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-content: center;
+    width: 100%;
+    height: calc(100vh - 4em);
+}
+
+.intro--content {
+    text-align: center;
+    align-self: center;
+    justify-self: center;
+    margin: 0 auto;
+    transform: translateY(-50%);
+
+    h1 {
+        font-size: 4rem;
+    }
+}
+
+.intro--subtitle {
+    font-weight: $fw-n;
+}
+
+.main-form {
+    display: flex;
+    flex-direction: column;
+    width: 90vw;
+    max-width: 25em;
+    margin: 0 auto 2em;
+
+    h1 {
+        font-size: 3rem;
+    }
+
+    input {
+        margin-bottom: 1em;
+        border-bottom: .1px solid $black;
+        background: transparent;
+    }
+
+    button {
+        margin: 1em auto 0;
+        justify-self: center;
+    }
+}
+
+.about {
+    width: 90vw;
+    max-width: 50em;
+    margin: 7em auto;
+    height: calc(100vh - 4em);
+    text-align: left;
+
+    h1 {
+        font-size: 2.5rem;
+    }
+
+    .email-us {
+        margin-bottom: 4em;
+    }
+
+}
+
+.already-citizen-link {
+    margin-bottom: 2em;
+}

@@ -1,0 +1,60 @@
+{% load static %}
+
+{% block content %}
+
+    {% for post in posts %}
+            {% if post.author.age < 65 %}
+                <div class="post green">
+                    <div class="post-header">
+                        <form class='bookmark-form' method='POST' action="{% url 'change_bookmark' post.pk %}" data-url='{{ request.build_absolute_uri|safe }}'>
+                            {% csrf_token %}
+                            <input type="text" value="{{post.pk}}" id="post-pk" hidden>
+                            {% if post in user.bookmarks.all %}
+                                <button class="bookmark-icon" type='submit'><img id="bm-{{post.pk}}" onclick="changeBookmark(this.id)" src="{% static 'img/is-bookmark.svg' %}" alt="bookmark"></button>
+                            {% else %}
+                                <button class="bookmark-icon" type='submit'><img id="bm-{{post.pk}}" onclick="changeBookmark(this.id)" src="{% static 'img/bookmark.svg' %}" alt="bookmark"></button>
+                            {% endif %}
+                        </form>
+                        <a class="post-title" href="{% url 'post_detail' post.pk %}">{{ post.title }}</a><br>
+                        <span class="post-meta-data"> by <a href="{% url 'profile' post.author.pk %}"><b>{{ post.author }}</b></a> | {{ post.published }}</span>
+                        {% if post.likes.count == 1 and post.comments.count == 1 %}
+                            <p class="post-likes-count">1 Comment | 1 Like</p>
+                        {% elif post.likes.count == 1 %}
+                            <p class="post-likes-count">{{post.comments.count}} Comments | 1 Like</p>
+                        {% elif post.comments.count == 1%}
+                            <p class="post-likes-count">1 Comment | {{post.likes.count}} Likes</p>
+                        {% else %}
+                            <p class="post-likes-count">{{post.comments.count}} Comments | {{post.likes.count}} Likes</p>
+                        {% endif %}
+                    </div>
+                    <p class="post-body">{{ post.body|truncatechars:500 }}</p>
+                </div>
+            {% else %}
+                <div class="post blue">
+                    <div class="post-header">
+                        <form class='bookmark-form' method='POST' action="{% url 'change_bookmark' post.pk %}" data-url='{{ request.build_absolute_uri|safe }}'>
+                            {% csrf_token %}
+                            <input type="text" value="{{post.pk}}" id="post-pk" hidden>
+                            {% if post in user.bookmarks.all %}
+                                <button class="bookmark-icon" type='submit'><img id="bm-{{post.pk}}" onclick="changeBookmark(this.id)" src="{% static 'img/is-bookmark.svg' %}" alt="bookmark"></button>
+                            {% else %}
+                                <button class="bookmark-icon" type='submit'><img id="bm-{{post.pk}}" onclick="changeBookmark(this.id)" src="{% static 'img/bookmark.svg' %}" alt="bookmark"></button>
+                            {% endif %}
+                        </form>
+                        <a class="post-title" href="{% url 'post_detail' post.pk %}">{{ post.title }} </a><br>
+                        <span class="post-meta-data">by <a href="{% url 'profile' post.author.pk %}"><b>{{ post.author }}</b></a> | {{ post.published }}</span>
+                        {% if post.likes.count == 1 %}
+                            <p class="post-likes-count">{{post.likes.count}} Like</p>
+                        {% else %}
+                            <p class="post-likes-count">{{post.likes.count}} Likes</p>
+                        {% endif %}
+                    </div>
+                    <p class="post-body">{{ post.body|truncatechars:500 }}</p>
+                </div>
+            {% endif %}
+        <br />
+    {% endfor %}
+    
+{% endblock content %}
+
+<script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha384-xBuQ/xzmlsLoJpyjoggmTEz8OWUFM0/RC5BsqQBDX2v5cMvDHcMakNTNrHIW2I5f" crossorigin="anonymous"></script>

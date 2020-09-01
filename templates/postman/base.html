@@ -1,0 +1,29 @@
+{% extends "base.html" %}{# not myself but a site-level one (TEMPLATE_DIRS setting) #}
+
+{% load i18n static %}{% load postman_tags %}{% load static %}
+
+{% block title %}{% trans "Messaging" %}{% endblock %}
+
+{% block extrahead %}{{ block.super }}
+<link type="text/css" media="all" rel="stylesheet" href="{% static 'postman/css/postman.css' %}" />
+{% endblock %}
+
+
+{% block postman_menu %}
+<div class="postman-menu-container">
+    <ul id="postman_menu">
+        {% postman_unread as unread_count %}
+        <a href="{% url 'postman:inbox' %}"><li>{% trans "Inbox" %}{% if unread_count %} <strong>({{ unread_count }})</strong>{% endif %}</li></a>
+        <a href="{% url 'postman:sent' %}"><li>{% trans "Sent Messages" %}</li></a>
+        <a href="{% url 'postman:write' %}"><li>{% trans "Write" %}</li></a>
+        <a href="{% url 'postman:archives' %}"><li>{% trans "Archives" %}</li></a>
+        <a href="{% url 'postman:trash' %}"><li>{% trans "Trash" %}</li></a>
+    </ul>
+</div> 
+<div class="inbox-nav-toggle">
+    <div class="inbox-hamburger">Messages ▼</div>
+</div>
+{% endblock %}
+
+<script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha384-xBuQ/xzmlsLoJpyjoggmTEz8OWUFM0/RC5BsqQBDX2v5cMvDHcMakNTNrHIW2I5f" crossorigin="anonymous"></script>
+<script src="{% static 'js/main.js' %}"></script>

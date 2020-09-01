@@ -1,0 +1,33 @@
+<div class="alert alert-block alert-{{ notice.level }}">
+  <i class="icon-mail{% if notice.unread %}-alt{% endif %}"></i>
+  
+  {% if notice.actor and notice.verb %}
+  <div class="notification">
+    <div class="notification-content">
+      {% if notice.actor.age < 65 %}
+        <img class="profile-pic green" src="{{notice.actor.profile_pic.url}}" alt="">
+      {% else %}
+        <img class="profile-pic blue" src="{{notice.actor.profile_pic.url}}" alt="">
+      {% endif %}
+      <div class="notification-meta">
+        <p><b><a href="{% url 'profile' notice.actor.pk %}">{{ notice.actor }}</a></b> {{ notice.verb }}  
+          {% if notice.verb == 'sent you a' %}
+            <b><a href="{% url 'profile' notice.actor.pk %}">neighbor request</a></b>.
+          {% elif notice.verb == 'has become your' %}
+            <b><a href="{% url 'profile' notice.actor.pk %}">neighbor</a></b>!
+          {% elif notice.verb == 'commented' %}
+            <b>{{ notice.action_object|truncatechars:15 }}</b> on your post, <br> 
+            <b><a href="{% url 'post_detail' notice.target.pk %}">{{ notice.target }}</a></b>
+          {% endif %}
+        </p>
+        <span class="time">{{ notice.timesince }} ago</span>
+      </div>
+    </div>
+
+    <a class="mark-as-read" href="{% url 'notifications:mark_as_read' notice.slug %}">
+      <button>Mark as Read</button>
+    </a>
+  </div>
+  {% endif %}
+  
+</div>

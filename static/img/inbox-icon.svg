@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="46.359" height="39.846" viewBox="0 0 46.359 39.846">
+  <g id="inbox-icon" transform="translate(-34.397 -176.897)">
+    <line id="Line_61" data-name="Line 61" y2="36.243" transform="translate(36.5 179)" fill="none" stroke="#fff" stroke-linecap="round" stroke-width="3"/>
+    <line id="Line_62" data-name="Line 62" y2="36.243" transform="translate(78.653 179)" fill="none" stroke="#fff" stroke-linecap="round" stroke-width="3"/>
+    <line id="Line_63" data-name="Line 63" y1="11.5" x2="15" transform="translate(63.653 179)" fill="none" stroke="#fff" stroke-linecap="round" stroke-width="3"/>
+    <line id="Line_64" data-name="Line 64" x2="15" y2="11.5" transform="translate(36.5 179)" fill="none" stroke="#fff" stroke-linecap="round" stroke-width="3"/>
+    <path id="Path_100" data-name="Path 100" d="M5541.836,6801.709l7.544,4.556-2.873-8.208,5.061-5.319-6.741,1.166-2.991-7.081-3.691,7.081-6.55-1.166,3.708,5.319-1.465,8.208Z" transform="translate(-5483.446 -6604)" fill="#fff" stroke="#797878" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"/>
+    <line id="Line_65" data-name="Line 65" x2="42.153" transform="translate(36.5 178.5)" fill="none" stroke="#fff" stroke-linecap="round" stroke-width="3"/>
+    <line id="Line_66" data-name="Line 66" x2="42.153" transform="translate(36.5 215.243)" fill="none" stroke="#fff" stroke-linecap="round" stroke-width="3"/>
+  </g>
+</svg>

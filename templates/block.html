@@ -1,0 +1,54 @@
+{% extends 'base.html' %}
+
+{% block title %} {{name}} {% endblock title %}
+
+{% block content %}
+    <div class="main-hero block">
+        <div class="block-meta">
+            <h1>{{name}}</h1>
+            <p class="block-description">{{description}}</p>
+            <p><b>Population:</b> {{population}} | Created {{date_created.date}}</p>
+            <div class="tags">
+                <div class="tags-content">
+                    <span class="tags-title"><b>Tags </b></span>
+                    {% if tags %}
+                        {% for tag in tags.all %}
+                            <p>{{tag.name}}</p>
+                        {% endfor %}
+                    {% endif %}
+                </div>
+            </div>
+
+            {% if in_user_blocks %}
+                <a href="{% url 'leave_block' pk %}"><button class="leave-join-block">Leave</button></a>
+            {% else %}
+                <a href="{% url 'join_block' pk %}"><button class="leave-join-block">Join</button></a>
+            {% endif %}
+        </div>
+
+        
+        {% if trending_posts %}
+            <div class="block-trending-posts">
+                <h2 class="block-subtitle">Trending Posts in this Block</h2>
+                <div class="post-list">
+                {% with trending_posts as posts %}
+                    {% include 'post_list.html' %}
+                {% endwith %}
+                </div>
+            </div>
+        {% endif %}
+
+        <div class="block-posts">
+            <h2 class="block-subtitle">Recent Posts in this Block</h2>
+            <div class="post-list">
+                {% if posts %}
+                    {% with posts as posts %}
+                        {% include 'post_list.html' %}
+                    {% endwith %}
+                {% else %}
+                    <p>This block has no posts.</p>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+{% endblock content %}
