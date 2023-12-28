@@ -1,5 +1,5 @@
 # JunoCity
-[See website.](http://junocity.com/)
+[See Product Hunt launch.](https://www.producthunt.com/products/junocity#junocity)
 
 ## Overview
 JunoCity was born as a platform where younger generations could ask questions, and seniors could tell their own stories and life lessons. The idea took root during the beginnings of COVID-19 in 2020, where JunoCity was intended to be utilized as a resource for people to ground themselves, and take in advice from the most experienced members of society, in one of the most tumultous times of the 21st century.
