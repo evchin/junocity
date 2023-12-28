@@ -32,4 +32,4 @@ rcssmin = "*"
 django-extensions = "*"
 
 [requires]
-python_version = "3.8.18"
+python_version = "3.8"
